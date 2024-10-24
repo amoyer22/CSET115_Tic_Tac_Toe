@@ -27,17 +27,20 @@
     background-color: white;
     border: 1px solid black;
     margin-right: 10px;
+    padding: 5px;
     width: 200px;
 }
 .tiesCount{
     background-color: white;
     border: 1px solid black;
     margin-right: 10px;
+    padding: 5px;
     width: 150px;
 }
 .player2{
     background-color: white;
     border: 1px solid black;
+    padding: 5px;
     width: 200px;
 }
 
@@ -56,10 +59,19 @@
     width: 100px;
     height: 100px;
 }
+.cell:hover{
+    background-color: #dedede;
+}
 .winner-message{
     margin: 10px;
 }
 
 #restart{
+    background-color: white;
+    border: solid 1px black;
+    padding: 5px;
     font-size: 25px;
+}
+#restart:hover{
+    background-color: #dedede;
 }
