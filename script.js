@@ -1,11 +1,18 @@
 const playerX = 'x'
 const playerO = 'o'
+let player1Wins = 0;
+let player2Wins = 0;
+let ties = 0;
+const restartButton = document.getElementById('restartButton')
 let currentPlayer = playerX;
 const cells = document.querySelectorAll('[data-cell]');
 const board = document.getElementById('board');
 const winnerMessageTextElement = document.getElementById('winnerMessageText');
 const restart = document.getElementById('restart');
 const winnerMessage = document.getElementById('winnerMessage')
+const player1WinsElement = document.querySelector('.player1 h1');
+const player2WinsElement = document.querySelector('.player2 h1');
+const tiesElement = document.querySelector('.tiesCount h1');
 
 const winCombos = [
     [0, 1, 2],
@@ -20,7 +27,7 @@ const winCombos = [
 
 startGame()
 
-restart.addEventListener('click', startGame)
+restartButton.addEventListener('click', startGame)
 
 
 function startGame() {
@@ -55,19 +62,27 @@ function startGame() {
 
 function swapTurns() {
     currentPlayer = currentPlayer === playerX ? playerO : playerX;
-    UpdaterTurnTracker()
+    updateTurnTracker()
 }
 
 
 function gameOver(draw) {
     if(draw) {
         winnerMessageTextElement.innerText = "Draw!"
+        ties++;
     }
     else {
         const winner = currentPlayer === playerX ? 'Player 1' : 'Player 2';
         winnerMessageTextElement.innerText = `${winner} wins!`;
+        if (currentPlayer === playerX) {
+            player1Wins++;
+        }
+        else {
+            player2Wins++;
+        }
     }
     winnerMessage.classList.add('show')
+    updateScoreboard()
 }
 //check if it is a draw 
 function isDraw() {
@@ -95,7 +110,13 @@ function checkWin(currentClass) {
     return false;
 
 }
-function UpdateTurnTracker() {
+function updateTurnTracker() {
     const turnTracker = document.querySelector('.turnTracker h2');
     turnTracker.textContent = currentPlayer === playerX ? "Player 1 (X):" : "Player 2 (O):";
+}
+
+function updateScoreboard() {
+    player1WinsElement.innerText = player1Wins;
+    player2WinsElement.innerText = player2Wins; 
+    tiesElement.innerText = ties;
 }
