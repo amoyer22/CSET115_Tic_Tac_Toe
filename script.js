@@ -3,11 +3,11 @@ const playerO = 'o'
 let currentPlayer = playerX;
 const cells = document.querySelectorAll('[data-cell]');
 const board = document.getElementById('board');
-const WinnerMessageTextElement = document.getElementById('winnerMessageText');
+const winnerMessageTextElement = document.getElementById('winnerMessageText');
 const restart = document.getElementById('restart');
-const WinnerMessage = document.getElementById('winnerMessage')
+const winnerMessage = document.getElementById('winnerMessage')
 
-const WinCombos = [
+const winCombos = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -47,32 +47,27 @@ function startGame() {
     }
 
  }
-function placeMark(cell, currentClass) {
-    if (currentClass === playerX) {
-        cell.classList.add(playerX)
-    }
-    else {
-        cell.classList.add(playerX)
-    }
-}
+
+ function placeMark(cell, currentClass) {
+    cell.classList.add(currentClass)
+    cell.innerText = currentClass.toUpperCase();
+ }
 
 function swapTurns() {
-    if(currentPlayer === playerX) {
-        currentPlayer = playerO
-    }
-    else {
-        currentPlayer = playerX
-    }
+    currentPlayer = currentPlayer === playerX ? playerO : playerX;
+    UpdaterTurnTracker()
 }
 
 
 function gameOver(draw) {
     if(draw) {
-        WinnerMessageTextElement.innerText = "Draw!"
+        winnerMessageTextElement.innerText = "Draw!"
     }
     else {
-        WinnerMessageTextElement.innerText = ` Player ${winner} wins!`
+        const winner = currentPlayer === playerX ? 'Player 1' : 'Player 2';
+        winnerMessageTextElement.innerText = `${winner} wins!`;
     }
+    winnerMessage.classList.add('show')
 }
 //check if it is a draw 
 function isDraw() {
@@ -83,13 +78,11 @@ function isDraw() {
 
 function checkWin(currentClass) {
     for (let i = 0; i < winCombos.length; i++) {
-        const combo = winCombos[i]
+        const combo = winCombos[i];
         let win = true;
-
         for (let j = 0; j < combo.length; j++) {
-            const index = combo[j]
+            const index = combo[j];
             const cell = cells[index];
-
             if (!cell.classList.contains(currentClass)) {
                 win = false;
                 break;
@@ -100,4 +93,9 @@ function checkWin(currentClass) {
         }
     }
     return false;
+
+}
+function UpdateTurnTracker() {
+    const turnTracker = document.querySelector('.turnTracker h2');
+    turnTracker.textContent = currentPlayer === playerX ? "Player 1 (X):" : "Player 2 (O):";
 }
