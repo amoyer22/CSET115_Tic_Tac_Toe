@@ -2,6 +2,8 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
 }
 
 .container{
@@ -20,15 +22,38 @@
 }
 .player1{
     background-color: white;
+    border: 1px solid black;
     margin-right: 10px;
     width: 200px;
 }
 .tiesCount{
     background-color: white;
+    border: 1px solid black;
     margin-right: 10px;
     width: 150px;
 }
 .player2{
     background-color: white;
+    border: 1px solid black;
     width: 200px;
+}
+
+.board{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid black;
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+#restart{
+    font-size: 25px;
 }
