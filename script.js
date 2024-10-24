@@ -7,7 +7,7 @@ const WinnerMessageTextElement = document.getElementById('winnerMessageText');
 const restart = document.getElementById('restart');
 const WinnerMessage = document.getElementById('winnerMessage')
 
-const WinCombo = [
+const WinCombos = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -22,18 +22,19 @@ startGame()
 
 restart.addEventListener('click', startGame)
 
+
 function startGame() {
-    isPlayer_O_Turn = false
+    currentPlayer = playerX;
         cells.forEach(cell => {
         cell.classList.remove(playerX)
         cell.classList.remove(playerO)
         cell.removeEventListener('click', MouseClick)
-        cell.addEventListeener('click', MouseClick, {once: true })
+        cell.addEventListener('click', MouseClick, {once: true })
     })
-    winningMessage.classList.remove('show')
+    winnerMessage.classList.remove('show')
 }
 
-MouseClick(e) {
+ function MouseClick(e) {
     const cell = e.target
     const currentClass = currentPlayer
     placeMark(cell, currentClass);
@@ -42,10 +43,10 @@ MouseClick(e) {
     } else if (isDraw()) {
         gameOver(true);
     } else {
-        swapTurn();
+        swapTurns();
     }
-}
 
+ }
 function placeMark(cell, currentClass) {
     if (currentClass === playerX) {
         cell.classList.add(playerX)
@@ -55,7 +56,7 @@ function placeMark(cell, currentClass) {
     }
 }
 
-function swapTurn() {
+function swapTurns() {
     if(currentPlayer === playerX) {
         currentPlayer = playerO
     }
@@ -64,6 +65,7 @@ function swapTurn() {
     }
 }
 
+
 function gameOver(draw) {
     if(draw) {
         WinnerMessageTextElement.innerText = "Draw!"
@@ -71,4 +73,31 @@ function gameOver(draw) {
     else {
         WinnerMessageTextElement.innerText = ` Player ${winner} wins!`
     }
+}
+//check if it is a draw 
+function isDraw() {
+    return Array.from(cells).every(cell => {
+        return cell.classList.contains(playerX) || cell.classList.contains(playerO);
+    });
+}
+
+function checkWin(currentClass) {
+    for (let i = 0; i < winCombos.length; i++) {
+        const combo = winCombos[i]
+        let win = true;
+
+        for (let j = 0; j < combo.length; j++) {
+            const index = combo[j]
+            const cell = cells[index];
+
+            if (!cell.classList.contains(currentClass)) {
+                win = false;
+                break;
+            }
+        }
+        if (win) {
+            return true;
+        }
+    }
+    return false;
 }
