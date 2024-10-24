@@ -1,5 +1,9 @@
-const PlayerX = 'x'
+const playerX = 'x'
 const playerO = 'o'
+let currentPlayer = playerX;
+const cells = document.querySelectorAll('[data-cell]');
+const board = document.getElementById('board')
+
 const win = [
     [0, 1, 2],
     [3, 4, 5],
@@ -10,6 +14,7 @@ const win = [
     [0, 4, 8],
     [2, 4, 6]
 ]
+
 
 function gameOver(draw) {
     if(draw) {
