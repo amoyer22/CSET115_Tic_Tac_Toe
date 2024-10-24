@@ -13,5 +13,16 @@
 
 .playerContainer{
     display: flex;
-    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 5px;
+}
+.player1{
+    background-color: white;
+    width: 200px;
+    margin-right: 20px;
+}
+.player2{
+    background-color: white;
+    width: 200px;
 }
