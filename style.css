@@ -8,7 +8,10 @@
 
 .container{
     background-color: #dedede;
+    border: 1px solid black;
     margin: auto;
+    margin-top: 25px;
+    padding: 10px;
     width: 600px;
     text-align: center;
 }
@@ -52,6 +55,9 @@
     margin: 10px;
     width: 100px;
     height: 100px;
+}
+.winner-message{
+    margin: 10px;
 }
 
 #restart{
