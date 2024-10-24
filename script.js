@@ -24,13 +24,44 @@ restart.addEventListener('click', startGame)
 
 function startGame() {
     isPlayer_O_Turn = false
-    cellElements.forEach(cell => {
+        cells.forEach(cell => {
         cell.classList.remove(playerX)
         cell.classList.remove(playerO)
         cell.removeEventListener('click', MouseClick)
         cell.addEventListeener('click', MouseClick, {once: true })
     })
     winningMessage.classList.remove('show')
+}
+
+MouseClick(e) {
+    const cell = e.target
+    const currentClass = currentPlayer
+    placeMark(cell, currentClass);
+    if (checkWin(currentClass)) {
+        gameOver(false);
+    } else if (isDraw()) {
+        gameOver(true);
+    } else {
+        swapTurn();
+    }
+}
+
+function placeMark(cell, currentClass) {
+    if (currentClass === playerX) {
+        cell.classList.add(playerX)
+    }
+    else {
+        cell.classList.add(playerX)
+    }
+}
+
+function swapTurn() {
+    if(currentPlayer === playerX) {
+        currentPlayer = playerO
+    }
+    else {
+        currentPlayer = playerX
+    }
 }
 
 function gameOver(draw) {
