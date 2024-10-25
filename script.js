@@ -3,12 +3,10 @@ const playerO = 'o'
 let player1Wins = 0;
 let player2Wins = 0;
 let ties = 0;
-const restartButton = document.getElementById('restartButton')
 let currentPlayer = playerX;
 const cells = document.querySelectorAll('[data-cell]');
 const board = document.getElementById('board');
 const winnerMessageTextElement = document.getElementById('winnerMessageText');
-const restart = document.getElementById('restart');
 const winnerMessage = document.getElementById('winnerMessage')
 const player1WinsElement = document.querySelector('.player1 h1');
 const player2WinsElement = document.querySelector('.player2 h1');
@@ -26,8 +24,6 @@ const winCombos = [
 ]
 
 startGame()
-
-restartButton.addEventListener('click', startGame)
 
 
 function startGame() {
@@ -119,4 +115,16 @@ function updateScoreboard() {
     player1WinsElement.innerText = player1Wins;
     player2WinsElement.innerText = player2Wins; 
     tiesElement.innerText = ties;
+}
+
+document.getElementById('restartButton').addEventListener('click', resetBoard);
+
+function resetBoard() {
+    cells.forEach(cell => {
+        cell.classList.remove(playerX);
+        cell.classList.remove(playerO);
+        cell.innerText = ''; // Clear the cell content
+    });
+    winnerMessage.classList.remove('show'); // Hide the winner message
+    startGame(); // Re-initialize the game
 }
