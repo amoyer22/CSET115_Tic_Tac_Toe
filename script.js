@@ -51,11 +51,6 @@ function startGame() {
 
  }
 
- function placeMark(cell, currentClass) {
-    cell.classList.add(currentClass)
-    cell.innerText = currentClass.toUpperCase();
- }
-
 function swapTurns() {
     currentPlayer = currentPlayer === playerX ? playerO : playerX;
     updateTurnTracker()
@@ -66,20 +61,36 @@ function gameOver(draw) {
     if(draw) {
         winnerMessageTextElement.innerText = "Draw!"
         ties++;
+
+        updateScoreboard()
+        resetBoard()
+        return
     }
     else {
         const winner = currentPlayer === playerX ? 'Player 1' : 'Player 2';
         winnerMessageTextElement.innerText = `${winner} wins!`;
         if (currentPlayer === playerX) {
             player1Wins++;
+
+            updateScoreboard()
+            resetBoard()
+            return
         }
         else {
             player2Wins++;
+            updateScoreboard()
+            resetBoard()
+            return
         }
     }
-    winnerMessage.classList.add('show')
-    updateScoreboard()
+
 }
+
+function placeMark(cell, currentClass) {
+    cell.classList.add(currentClass)
+    cell.innerText = currentClass.toUpperCase();
+ }
+
 //check if it is a draw 
 function isDraw() {
     return Array.from(cells).every(cell => {
