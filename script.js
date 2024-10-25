@@ -61,6 +61,7 @@ function gameOver(draw) {
     if(draw) {
         winnerMessageTextElement.innerText = "Draw!"
         ties++;
+
         updateScoreboard()
         resetBoard()
         return
@@ -70,6 +71,7 @@ function gameOver(draw) {
         winnerMessageTextElement.innerText = `${winner} wins!`;
         if (currentPlayer === playerX) {
             player1Wins++;
+
             updateScoreboard()
             resetBoard()
             return
@@ -81,6 +83,7 @@ function gameOver(draw) {
             return
         }
     }
+
 }
 
 function placeMark(cell, currentClass) {
